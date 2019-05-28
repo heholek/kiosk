@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Config Editor</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff">
+</head>
+
+<body class="active">
+
+  <h1>Config Editor</h1>
+  <div id='editor_holder'></div>
+  <button id='submit'>Submit (console.log)</button>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+  <script>
+      var editor;
+
+      $(function(){
+        $.getJSON('./schema.json').then(function(schema){
+          delete schema.properties.devices; // don't allow sub-configs in the editor
+          editor = new JSONEditor(document.getElementById('editor_holder'),{
+            schema: schema
+          });
+        });
+      });
+
+      document.getElementById('submit').addEventListener('click',function() {
+        console.log(editor.getValue());
+      });
+    </script>
+</body>
+
+</html>
