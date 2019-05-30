@@ -6,40 +6,130 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.typekit.net/wcm7ifi.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <style type="text/css">
+
+    html body{
+        font-family:  'Helvetica', 'Arial', sans-serif;
+    }
+
+    h1, h2, h3{
+      font-family: 'Bree', 'Arial', sans-serif;
+      font-weight: 100;
+    }
+    h1, h2, h3, a{
+      color: #45d326;
+    }
+
+    #editor > div > h3 > span,
+    button.json-editor-btntype-deletelast,
+    button.json-editor-btntype-deleteall{
+      display: none;
+      visibility: hidden;
+    }
+
+    /*#editor h3{
+      font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: black;
+      line-height: 25.2px;
+    }*/
+
+  </style>
 </head>
 
 <body class="active">
 
-  <h1>Config Editor</h1>
-  <div id='editor'></div>
-  <button id='submit'>Submit</button>
+    <div class="grid-container">
+
+      <div class="grid-x">
+        <div class="cell small-3"></div>
+
+            <div id="editor"></div>
+
+            <h2>Save</h2>
+
+            <button class="button" id='submit'>Submit</button>
+        </div>
+        <div class="cell small-3"></div>
+      </div>
+
+    </div>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
   <script>
-      var editor;
+      const categories = {
+        content: {
+          title: "Content",
+          description: "Multiple URLs must be seperated by a comma. "
+              + "If more than one URL is specified they can either be opened in tabs or rotated at defined rate. "
+              + "<strong>URL must start with http:// or https://</strong>. Tokens can be embedded in the URL and will be replaced with associated value. "
+              + "E.g.: 'https://www.mysite.com/content?device={id}' will actually request 'https://https://www.mysite.com/content?device=12345' "
+              + "where '12345' is a identifier unique to this installtion of the application.",
+        },
+        system: {
+          title: "System Information"
+        },
+        browser: {
+          title: "Browser"
+        },
+        admin: {
+          title: "Adminstration"
+        },
+        scheduling: {
+          title: "Scheduling"
+        }
+      };
+      for(let c in categories){
+        categories[c].schema = {
+          type: "object",
+          id: c,
+          properties: {}
+        }
+      };
 
       $(function(){
         $.ajaxSetup({ cache: false });
         $.getJSON('./schema.json').then(function(schema){
-          delete schema.properties.devices; // don't allow sub-configs in the editor
-          console.log(schema);
-          editor = new JSONEditor(document.getElementById('editor') , {
-            schema: schema,
-            theme: 'foundation6',
-            iconlib: "fontawesome5",
-            disable_collapse: true,
-            disable_edit_json: true,
-            disable_properties: true
-          });
+          // asign the properties from the master schema to specififc categories
+          for(let p in schema.properties){
+            let field = schema.properties[p];
+            if(field.category && categories[field.category]){
+              categories[field.category].schema.properties[p] = field;
+            }
+          }
+          // display the categories
+          for(let c in categories){
+            let category = categories[c];
+            let $container = $("<div><h2>"+category.title+'</h2></div>').attr('id', c).appendTo('#editor');
+            if(category.description){
+              $('<p/>').html(category.description).appendTo($container);
+            }
+            if(Object.keys(category.schema.properties).length){
+              let el = $('<div class="editor"/>').appendTo($container).get()[0];
+              category.editor = new JSONEditor(document.getElementById('editor') , {
+                schema: category.schema,
+                iconlib: "fontawesome5",
+                disable_collapse: true,
+                disable_edit_json: true,
+                disable_properties: true
+              });
+            }
+          }
         });
       });
 
       document.getElementById('submit').addEventListener('click',function() {
-        console.log(editor.getValue());
+        const values = {};
+        for(c in categories){
+          if(categories[c].editor){
+            Object.assign(values, categories[c].editor.getValue());
+          }
+        }
+        console.log(values);
       });
     </script>
 </body>

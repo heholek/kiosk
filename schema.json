@@ -5,203 +5,340 @@
     "shownav": {
       "title": "Show Navigation",
       "description": "Show home/forward/back browser navigation bar.",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 13
    },
    "showbattery": {
-      "title": "Show Battery Indicator",
+      "title": "Show Battery Status",
       "description": "Display icon and percent indicator of remaining battery life.",
-      "type": "boolean"
+      "type": "boolean", 
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 20
    },
    "allowprint": {
-      "title": "Allow Printing",
-      "description": "Enable printing via CTRL+P shortcut or via application.",
-      "type": "boolean"
+      "title": "Enable Printing",
+      "description": "Enable printing via CTRL+P shortcut or content application.",
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 21
     },
     "disallowupload": {
       "title": "Disable File Upload",
       "description": "Set all file upload fields to disabled.",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 22
     },
     "allowdownload": {
       "title": "Allow File Download",
       "description": "Allow file downloading",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 15
     },
     "disallowiframes": {
       "title": "Disable Iframes",
       "description": "Do not load content in iframes.",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 16
     },
     "hidegslidescontrols": {
       "title": "Hide Google Slides Controls",
       "description": "Only show Google Slides content when using embedded player URL. Do not show control overlay.",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 14
     },
     "reset": {
       "title": "Inactivity Reset Time (minutes)",
       "description": "Delay before showing screensaver or resetting application after last interaction.",
-      "type": "number"
+      "type": "number",
+      "minimum": 0,
+      "category": "scheduling",
+      "propertyOrder": 29
     },
     "screensavertime": {
       "title": "Screensaver Time",
       "description": "",
-      "type": "number"
+      "type": "number",
+      "category": "scheduling",
+      "propertyOrder": 30
     },
     "screensaverurl": {
       "title": "Screensaver URL",
       "description": "The content URL to be used as a screensaver",
-      "type": "string"
+      "type": "string",
+      "format": "url",
+      "category": "scheduling",
+      "propertyOrder": 31
     },
     "screensaverwarningtime": {
       "title": "Screensaver Warning Time",
       "description": "The length of time to show the screensaver warning prior to activating the screensaver. Set to 0 to disable the warning. (seconds)",
-      "type": "number"
+      "type": "number",
+      "category": "scheduling",
+      "propertyOrder": 32
     },
     "screensaverwarningmessage": {
       "title": "Screensaver Warning Message",
       "description": "The message to display prior to activating the screensaver",
-      "type": "string"
+      "type": "string",
+      "category": "scheduling",
+      "propertyOrder": 33
     },
     "screensaverreloadinterval": {
       "title": "Screensaver Reload Interval",
       "description": "How often to refresh the screensaver content while it is active. (minutes)",
-      "type": "number"
+      "type": "number",
+      "minimum": 0,
+      "category": "scheduling",
+      "propertyOrder": 34
     },
     "clearcookiesreset": {
-      "title": "Clear Cookies on Reset",
-      "description": "Should we clear cookies on reset?",
-      "type": "boolean"
+      "title": "Clear Cache on Reset",
+      "description": "Should we clear cache on reset?",
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "scheduling",
+      "propertyOrder": 35
     },
     "restart": {
       "title": "Restart Time",
       "description": "The hour of the day at which to restart. 1-24.",
-      "type": "number"
+      "type": "number",
+      "minimum": 1,
+      "maximum": 24,
+      "category": "scheduling",
+      "propertyOrder": 36
     },
     "restartday": {
       "title": "Restart Day",
       "description": "The day of the week upon which to restart. e.g. 'monday'. Leave blank for daily.",
-      "type": "string"
+      "type": "string",
+      "enum": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+      "category": "scheduling",
+      "propertyOrder": 37
     },
     "remoteschedule": {
       "title": "Use Remote Schedule",
       "description": "Should we use a remote schedule?",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "scheduling",
+      "propertyOrder": 38
     },
     "remotescheduleurl": {
       "title": "Remote Schedule URL",
       "description": "The URL of the JSON formatted schedule.",
-      "type": "string"
+      "type": "string",
+      "format": "url",
+      "category": "scheduling",
+      "propertyOrder": 39
     },
     "schedulepollinterval": {
       "title": "Remote Schedule Poll Interval",
       "description": "How often to check for an updated schedule.",
-      "type": "number"
+      "type": "number",
+      "minimum": 0,
+      "category": "scheduling",
+      "propertyOrder": 40
     },
     "hidecursor": {
       "title": "Hide Cursor",
       "description": "Hide the cursor.",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 10
     },
     "disablecontextmenu": {
       "title": "Disable Context Menu",
       "description": "Disable the context menu.",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 17
     },
     "disabledrag": {
-      "title": "Disable Drag",
-      "description": "Disable draggigng images.",
-      "type": "boolean"
+      "title": "Disable Image Drag",
+      "description": "Disable dragging images.",
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 11
     },
     "disabletouchhighlight": {
       "title": "Disable Touch Highlight",
       "description": "Disable hightlight on touch.",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 18
     },
     "disableselection": {
-      "title": "Disable Selection",
+      "title": "Disable Text Selection",
       "description": "Disable selecting text.",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 12
     },
     "newwindow": {
-      "title": "New Window",
+      "title": "Enable New Windows & Dialogs",
       "description": "Allow pop-ups and new windows?",
-      "type": "boolean"
+      "type": "boolean",
+      "format": "checkbox",
+      "category": "browser",
+      "propertyOrder": 19
     },
     "servelocaldirectory": {
       "title": "Serve Local: Directory",
       "description": "The directory to serve content from",
-      "type": "string"
+      "type": "string",
+      "propertyOrder": 4,
+      "category": "content"
     },
     "servelocalhost": {
       "title": "Serve Local: Host",
       "description": "The host to serve local content on",
-      "type": "string"
+      "type": "string",
+      "propertyOrder": 2,
+      "category": "content"
     },
     "servelocalport": {
       "title": "Serve Local: Port",
       "description": "The port to serve local content on",
-      "type": "number"
+      "type": "number",
+      "propertyOrder": 3,
+      "category": "content"
     },
     "url": {
       "title": "Content URL(s)",
       "description": "URL must start with http:// or https://",
       "type": "array",
+      "format": "table",
       "items": {
-        "type": "string"
-      }
+        "type": "string",
+        "title": "url",
+        "format": "url"
+      },
+      "propertyOrder": 1,
+      "category": "content"
     },
     "tokenserver": {
       "title": "Token Server URL",
       "description": "URL to fetch additional tokens from as JSON.",
-      "type": "string"
+      "type": "string",
+      "format": "url",
+      "category": "content",
+      "propertyOrder": 6
     },
     "customtoken": {
       "title": "Custom Token JSON",
       "description": "Stringified JSON object including additional tokens.",
-      "type": "string"
+      "type": "string",
+      "category": "content",
+      "propertyOrder": 7
     },
     "whitelist": {
       "title": "Content Domain Whitelist",
       "description": "When specified, will only allow content on these domains.",
       "type": "array",
+      "format": "table",
       "items": {
-        "type": "string"
-      }
+        "type": "string",
+        "title": "domain",
+        "format": "url"
+      },
+      "category": "content",
+      "propertyOrder": 8
+    },
+    "displaysysteminfo": {
+      "type": "string",
+      "enum": ["admin", "always"],
+      "category": "system",
+      "propertyOrder": 9
     },
     "multipleurlmode": {
       "title": "Multiple URL Mode",
-      "description": "Specify how to handle multiple content URLs. Valid values: 'tabs', 'rotate'",
-      "type": "string"
+      "description": "Specify how to handle multiple content URLs.",
+      "type": "string",
+      "enum": ["tabs", "rotate"],
+      "category": "content",
+      "propertyOrder": 5
     },
     "newwindowmode": {
       "title": "New Window Mode",
-      "description": "Either 'modal' or 'tab'.",
-      "type": "string"
+      "description": "",
+      "type": "string",
+      "enum": ["modal", "tab"],
+      "category": "browser",
+      "propertyOrder": 23
     },
     "rotaterate": {
       "title": "Rotate Rate",
       "description": "With 'rotate' multiple URL mode, how often should the content switch? (seconds)",
-      "type": "number"
+      "type": "number",
+      "minimum": 0,
+      "category": "content"
     },
     "useragent": {
       "title": "User Agent",
       "description": "Customize the user agent sent with content and screensaver requests.",
-      "type": "string"
+      "type": "string",
+      "category": "browser",
+      "propertyOrder": 24
     },
     "authorization": {
       "title": "Authorization Header",
       "description": "Customize the authorization header sent with content and screensaver requests.",
-      "type": "string"
+      "type": "string",
+      "category": "browser",
+      "propertyOrder": 25
+    },
+    "localadmin": {
+      "title": "Local Administration",
+      "description": "Press CTRL+A to activate after setup",
+      "type": "boolean",
+      "category": "admin",
+      "propertyOrder": 26
+    },
+    "username": {
+      "title": "Username",
+      "description": "",
+      "type": "string",
+      "category": "admin",
+      "propertyOrder": 27
+    },
+    "password": {
+      "title": "Password",
+      "description": "",
+      "type": "string",
+      "category": "admin",
+      "propertyOrder": 28
     },
     "sleepmode": {
       "title": "Sleep Mode",
-      "description": "Valid values: 'display', 'none'",
-      "type": "string"
+      "description": "",
+      "type": "string",
+      "enum": ["display", "none"],
+      "category": "scheduling",
+      "propertyOrder": 41
     },
     "devices": {
       "type": "array",
       "items": {
         "type": "object",
+        "title": "device",
         "properties": {
           "uuid": { "type": "string" },
           "assetid": { "type": "string" },
